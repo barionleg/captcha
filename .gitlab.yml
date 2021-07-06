@@ -1,0 +1,10 @@
+build:
+  image: debian:latest
+  before_script:
+    - apt-get update
+    - apt-get install -y valac libwebkit2gtk-4.0-dev
+  script:
+    - valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 captcha-helper.vala
+  artifacts:
+    paths:
+      - captcha-helper
