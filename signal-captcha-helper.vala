@@ -14,6 +14,7 @@ public class ValaBrowser : Window {
 
         this.web_view = new WebView ();
         this.web_view.web_context.register_uri_scheme("signalcaptcha", token_issued);
+        this.web_view.web_context.clear_cache();
         var scrolled_window = new ScrolledWindow (null, null);
         scrolled_window.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
         scrolled_window.add (this.web_view);
