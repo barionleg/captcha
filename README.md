@@ -22,8 +22,16 @@ valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 signal-captcha-helper.vala
 
 The captcha token is output to standard out when the program completes, so you probably
 want to launch this tool from the terminal so you can see the output. There are no
-options (for now), so just invoke it directly:
+options (for now), so just invoke it directly.
+
+For a captcha token to use when registering an account:
 
 ```
 ./signal-captcha-helper
+```
+
+for a challenge token to use to send messages:
+
+```
+./signal-captcha-helper --challenge
 ```

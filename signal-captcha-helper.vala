@@ -4,13 +4,14 @@ using WebKit;
 public class ValaBrowser : Window {
 
     private const string TITLE = "Signal Captcha Helper";
-    private const string DEFAULT_URL = "https://signalcaptchas.org/registration/generate.html";
+    private const string CHALLENGE_URL = "https://signalcaptchas.org/challenge/generate.html";
+    private const string REGISTER_URL = "https://signalcaptchas.org/registration/generate.html";
 
     private WebView web_view;
 
     public ValaBrowser () {
         this.title = ValaBrowser.TITLE;
-        set_default_size (450, 600);
+        set_default_size (500, 600);
 
         this.web_view = new WebView ();
         this.web_view.web_context.register_uri_scheme("signalcaptcha", token_issued);
@@ -28,16 +29,24 @@ public class ValaBrowser : Window {
       Gtk.main_quit();
     }
 
-    public void start () {
+    public void start (string url) {
         show_all ();
-        this.web_view.load_uri (DEFAULT_URL);
+        this.web_view.load_uri (url);
     }
 
     public static int main (string[] args) {
         Gtk.init (ref args);
 
         var browser = new ValaBrowser ();
-        browser.start();
+        var url = REGISTER_URL;
+
+        if(args.length > 0) {
+            if(args[1] == "--challenge") {
+                url = CHALLENGE_URL;
+            }
+        }
+
+        browser.start(url);
 
         Gtk.main ();
 
